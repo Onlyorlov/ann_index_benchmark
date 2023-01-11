@@ -10,13 +10,6 @@ class Faiss(BaseANN):
 
     def batch_query(self, X, k):
         _, I = self.index.search(X.astype(np.float32), k)
-        # res = []
-        # for i in range(len(L)):
-        #     r = []
-        #     for l in L[i]:
-        #         if l != -1:
-        #             r.append(l)
-        #     res.append(r)
         return I
 
     def freeIndex(self):
@@ -26,13 +19,10 @@ class Faiss(BaseANN):
 class FaissLSH(Faiss):
     def __init__(self, method_param):
         self.name = "FaissLSH (%s)" % (method_param)
-        if method_param["metric"] not in ("angular", "euclidean"):
+        if method_param["metric"] not in ("hamming"):
             raise NotImplementedError(
                 "FaissLSH doesn't support metric %s" % method_param["metric"]
             )
-        self.metric = (
-            faiss.METRIC_INNER_PRODUCT if self._metric == "angular" else faiss.METRIC_L2
-        )
         self.n_bits = method_param[
             "n_bits"
         ]  # the number of bits to use per stored vector
@@ -41,7 +31,7 @@ class FaissLSH(Faiss):
         if X.dtype != np.float32:
             X = X.astype(np.float32)
         f = X.shape[1]
-        self.index = faiss.IndexLSH(f, self.n_bits, self.metric)
+        self.index = faiss.IndexLSH(f, self.n_bits)
         self.index.train(X)
         self.index.add(X)
 
@@ -54,7 +44,9 @@ class FaissIVF(Faiss):
                 "FaissIVF doesn't support metric %s" % method_param["metric"]
             )
         self.metric = (
-            faiss.METRIC_INNER_PRODUCT if self._metric == "angular" else faiss.METRIC_L2
+            faiss.METRIC_INNER_PRODUCT
+            if method_param["metric"] == "angular"
+            else faiss.METRIC_L2
         )
         self.n_list = method_param["n_list"]  # the number of cells/centroids
         self.n_probe = method_param["n_probe"]  # Search for top-n centroids
@@ -80,7 +72,9 @@ class FaissIVFPQfs(Faiss):
                 "FaissIVF doesn't support metric %s" % method_param["metric"]
             )
         self.metric = (
-            faiss.METRIC_INNER_PRODUCT if self._metric == "angular" else faiss.METRIC_L2
+            faiss.METRIC_INNER_PRODUCT
+            if method_param["metric"] == "angular"
+            else faiss.METRIC_L2
         )
         self.n_list = method_param["n_list"]  # the number of cells/centroids
         self.n_probe = method_param["n_probe"]  # Search for top-n centroids

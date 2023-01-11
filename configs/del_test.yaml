@@ -12,10 +12,20 @@ runs:
   constructor: BruteForce
   search_parameters: {"metric":["angular"]}
 
+- name: scann
+  module: src.scann
+  constructor: Scann
+  search_parameters: {"metric":["angular", "euclidean"],
+      "n_leaves": [2000],
+      "avq_threshold": [0.2],
+      "dims_per_block": [2],
+      "leaves_to_search": [100],
+      "reorder": [100]}
+
 - name: faissLSH
   module: src.faiss
   constructor: FaissLSH
-  search_parameters: {"metric":["angular", "euclidean"],
+  search_parameters: {"metric":["hamming"],
       "n_bits": [8]}
 
 - name: faissIVF

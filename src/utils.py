@@ -4,7 +4,7 @@ import numpy as np
 from dataclasses import dataclass
 from typing import Iterable, Any, Dict, Type
 from itertools import product
-from base_index import BaseANN
+from src.base_index import BaseANN
 
 
 def measure_recall(

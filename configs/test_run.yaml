@@ -30,7 +30,7 @@ runs:
 - name: faissLSH
   module: src.faiss
   constructor: FaissLSH
-  search_parameters: {"metric":["angular", "euclidean"],
+  search_parameters: {"metric":["hamming"],
       "n_bits": [8, 12, 16]}
 
 - name: faissIVF
@@ -47,3 +47,13 @@ runs:
       "n_list": [200, 400, 800],
       "n_probe": [8, 12, 16],
       "k_reorder": [0, 10, 20]}
+
+- name: scann
+  module: src.scann
+  constructor: Scann
+  search_parameters: {"metric":["angular", "euclidean"],
+      "n_leaves": [100, 500, 1000, 2000],
+      "avq_threshold": [0.2],
+      "dims_per_block": [1, 2, 4],
+      "leaves_to_search": [10, 100, 500],
+      "reorder": [10, 100, 200]}

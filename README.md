@@ -1,7 +1,9 @@
 # Benchmarking existing ANN Indexes
 
 <!-- ABOUT THE PROJECT -->
-<!-- ## About The Project -->
+## About The Project
+
+Run benchmarks for approximate nearest neighbor algorithms search on your dataset.
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -36,7 +38,7 @@ python run.py --config_pth configs/test_run.yaml  # Path to your config file wit
 * [scikit-learn](http://scikit-learn.org/stable/modules/neighbors.html)
 * [hnswlib](https://github.com/nmslib/hnsw)
 * [FAISS](https://github.com/facebookresearch/faiss.git)
-<!-- * [ScaNN](https://github.com/google-research/google-research/tree/master/scann) -->
+* [ScaNN](https://github.com/google-research/google-research/tree/master/scann)
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -45,10 +47,10 @@ python run.py --config_pth configs/test_run.yaml  # Path to your config file wit
 
 * [ ] Add requirements.txt
 
-* [ ] Add ScaNN
+* [x] Add ScaNN
 
 * [ ] Add run results
 
-* [ ] Add About The Project
+* [x] Add About The Project
 
 * [ ] Cleanup
