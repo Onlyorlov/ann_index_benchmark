@@ -1,0 +1,13 @@
+# Comment
+dataset_pth: 'embeddings/result_embeddings.npy'
+split: True
+run_count: 2
+k: 20
+nun_queries: 100
+
+name: annoy
+module: src.annoy
+constructor: Annoy
+search_parameters: {"metric":["angular", "euclidean"],
+    "n_trees": [100,200,400],
+    "search_k": [500, 1000, 2000, 4000, 8000]}

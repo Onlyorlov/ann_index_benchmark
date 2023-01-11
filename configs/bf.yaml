@@ -1,0 +1,11 @@
+# Comment
+dataset_pth: 'embeddings/result_embeddings.npy'
+split: True
+run_count: 2
+k: 20
+nun_queries: 100
+
+name: bf_knn
+module: src.brute_force
+constructor: BruteForce
+search_parameters: {"metric":["angular", "euclidean"]}

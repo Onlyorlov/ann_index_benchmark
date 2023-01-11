@@ -1,0 +1,14 @@
+# Comment
+dataset_pth: 'embeddings/result_embeddings.npy'
+split: True
+run_count: 2
+k: 20
+nun_queries: 100
+
+name: hnswlib
+module: src.hnswlib
+constructor: HnswLib
+search_parameters: {"metric":["angular", "euclidean"],
+    "M": [4,8,16],
+    "efConstruction": [100, 200, 500, 1000],
+    "ef": [200]}

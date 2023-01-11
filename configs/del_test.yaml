@@ -1,0 +1,49 @@
+# Comment
+experiment_name: 'run_test'
+dataset_pth: 'embeddings/result_embeddings.npy'
+split: True
+run_count: 2
+k: 20
+nun_queries: 100
+
+runs:
+- name: bf_knn
+  module: src.brute_force
+  constructor: BruteForce
+  search_parameters: {"metric":["angular"]}
+
+- name: faissLSH
+  module: src.faiss
+  constructor: FaissLSH
+  search_parameters: {"metric":["angular", "euclidean"],
+      "n_bits": [8]}
+
+- name: faissIVF
+  module: src.faiss
+  constructor: FaissIVF
+  search_parameters: {"metric":["angular", "euclidean"],
+      "n_list": [200],
+      "n_probe": [8]}
+
+- name: faissIVFPQfs
+  module: src.faiss
+  constructor: FaissIVFPQfs
+  search_parameters: {"metric":["angular", "euclidean"],
+      "n_list": [200],
+      "n_probe": [8],
+      "k_reorder": [0]}
+
+- name: annoy
+  module: src.annoy
+  constructor: Annoy
+  search_parameters: {"metric":["angular", "euclidean"],
+      "n_trees": [4],
+      "search_k": [100]}
+
+- name: hnswlib
+  module: src.hnswlib
+  constructor: HnswLib
+  search_parameters: {"metric":["angular", "euclidean"],
+      "M": [4],
+      "efConstruction": [100],
+      "ef": [200]}
